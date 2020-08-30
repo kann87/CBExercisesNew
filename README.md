@@ -49,4 +49,24 @@ Value1: <value_resolved_in_runtime>
 4) Thoughts on non-functional requirements
 5) A concrete implementation of the criteria
  a) Object model
-b) Condition evaluation
+ b) Condition evaluation
+
+# Done Things
+1) A design document with a UML diagram of all the classes - Attached the respective Image.
+2) Data model for the preference & audits storage - Used DAO(preference --> ConcurrentHashMap, audit -> TreeMap)
+3) A sample client code for preference definition for the following cases
+ a) Simple preference - Please refer the CheckSettings.java
+ b) Preference with a dependency on another preference - TBD
+ c) Preference with a custom dependency on another preference - TBD
+ d) Preference with a criteria - Please refer the CheckSettings.java (ex: system.andCriteria().EQ(key,checkValue).NEQ(key1,checkValue1).GT(key1, checkValue2).execute())
+4) Thoughts on non-functional requirements
+5) A concrete implementation of the criteria - Please refer the CheckSettings.java
+ a) Object model
+ b) Condition evaluation
+
+
+
+ 
+
+ 
+
