@@ -42,11 +42,11 @@ Value1: <value_resolved_in_runtime>
 1) A design document with a UML diagram of all the classes
 2) Data model for the preference & audits storage
 3) A sample client code for preference definition for the following cases
-a) Simple preference
-b) Preference with a dependency on another preference
-c) Preference with a custom dependency on another preference
-d) Preference with a criteria
+ a) Simple preference
+ b) Preference with a dependency on another preference
+ c) Preference with a custom dependency on another preference
+ d) Preference with a criteria
 4) Thoughts on non-functional requirements
 5) A concrete implementation of the criteria
-a) Object model
+ a) Object model
 b) Condition evaluation
