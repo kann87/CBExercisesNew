@@ -64,7 +64,19 @@ Value1: <value_resolved_in_runtime>
  a) Object model
  b) Condition evaluation
 
-
+## Sample Code
+```
+Settings macSettings = new MacSettings();
+macSettings
+			.andCriteria() // returns true if all below conditions are valid
+			.EQ("Conf2", "2") // EQUALS
+			.NEQ("Conf10", "11") // NOT EQUALS
+			.BETWEEN("Conf50", "49", "51") // BETWEEN
+			.IN("Conf90", "89", "90", "91") // IN Clause
+			.GTE("Conf60","61") // GREATER THAN OR EQUAL
+			.LT("Conf60","59") // LESSER THAN
+			.println();	// will execute() and print in console	
+```
 
  
 
