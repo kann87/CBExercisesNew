@@ -60,7 +60,7 @@ Value1: <value_resolved_in_runtime>
  c) Preference with a custom dependency on another preference - TBD
  d) Preference with a criteria - Please refer the CheckSettings.java (ex: system.andCriteria().EQ(key,checkValue).NEQ(key1,checkValue1).GT(key1, checkValue2).execute())
 4) Thoughts on non-functional requirements
-5) A concrete implementation of the criteria - Please refer the CheckSettings.java
+5) A concrete implementation of the criteria - Please refer the CheckSettings.java, CriterialBuilder.java, CriteriaBuilderTest.java
  a) Object model
  b) Condition evaluation
 
