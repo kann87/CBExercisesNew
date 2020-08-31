@@ -5,13 +5,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.chargebeeExercises.criteria.CriteriaBuilder;
 import com.chargebeeExercises.enums.LogicalCondition;
 import com.chargebeeExercises.enums.SettingsDevice;
 import com.chargebeeExercises.enums.SettingsType;
 
-public abstract class AbstractSettings extends Settings<AbstractSettings> {
+public abstract class AbstractSettings extends Settings {
 	private final Map<String, String> dataMap;
 	private final Map<Long, String> auditMap;
 	private final SettingsDevice deviceName; // MacOs, Windows, Linux...
@@ -21,7 +22,7 @@ public abstract class AbstractSettings extends Settings<AbstractSettings> {
 
 	public AbstractSettings(SettingsDevice deviceName, SettingsType deviceType) {
 		// TODO Auto-generated constructor stub
-		this.dataMap = new TreeMap<>();
+		this.dataMap = new ConcurrentHashMap<>();
 		this.auditMap = new TreeMap<>();
 		this.deviceName = deviceName;
 		this.deviceType = deviceType;
@@ -173,11 +174,17 @@ public abstract class AbstractSettings extends Settings<AbstractSettings> {
 
 	@Override
 	public CriteriaBuilder andCriteria() {
+		if(size()==0) {
+			throw new RuntimeException("Empty map");
+		}
 		return new CriteriaBuilder(LogicalCondition.AND, dataMap);
 	}
 
 	@Override
 	public CriteriaBuilder orCriteria() {
+		if(size()==0) {
+			throw new RuntimeException("Empty map");
+		}
 		return new CriteriaBuilder(LogicalCondition.OR, this.dataMap);
 	}
 

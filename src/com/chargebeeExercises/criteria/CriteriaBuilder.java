@@ -24,39 +24,55 @@ public class CriteriaBuilder {
 		System.out.println("---INITIALISATION DONE---");
 	}
 
+	public boolean isKeyExists(String key) {
+		return critDataMap.containsKey(key);
+	}
+
 	public CriteriaBuilder EQ(String key, String compareValue) {
-		boolean result = critDataMap.get(key).compareTo(compareValue) == 0;
-		this.critList.add(result);
+		if (isKeyExists(key)) {
+			boolean result = critDataMap.get(key).compareTo(compareValue) == 0;
+			this.critList.add(result);
+		}
 		return this;
 	}
 
 	public CriteriaBuilder NEQ(String key, String compareValue) {
-		boolean result = critDataMap.get(key).compareTo(compareValue) == 0;
-		this.critList.add(!result);
+		if (isKeyExists(key)) {
+			boolean result = critDataMap.get(key).compareTo(compareValue) == 0;
+			this.critList.add(!result);
+		}
 		return this;
 	}
 
 	public CriteriaBuilder GT(String key, String compareValue) {
-		boolean result = critDataMap.get(key).compareTo(compareValue) < 0;
-		this.critList.add(result);
+		if (isKeyExists(key)) {
+			boolean result = critDataMap.get(key).compareTo(compareValue) < 0;
+			this.critList.add(result);
+		}
 		return this;
 	}
 
 	public CriteriaBuilder GTE(String key, String compareValue) {
-		boolean result = critDataMap.get(key).compareTo(compareValue) <= 0;
-		this.critList.add(result);
+		if (isKeyExists(key)) {
+			boolean result = critDataMap.get(key).compareTo(compareValue) <= 0;
+			this.critList.add(result);
+		}
 		return this;
 	}
 
 	public CriteriaBuilder LT(String key, String compareValue) {
-		boolean result = critDataMap.get(key).compareTo(compareValue) > 0;
-		this.critList.add(result);
+		if (isKeyExists(key)) {
+			boolean result = critDataMap.get(key).compareTo(compareValue) > 0;
+			this.critList.add(result);
+		}
 		return this;
 	}
 
 	public CriteriaBuilder LTE(String key, String compareValue) {
-		boolean result = critDataMap.get(key).compareTo(compareValue) >= 0;
-		this.critList.add(result);
+		if (isKeyExists(key)) {
+			boolean result = critDataMap.get(key).compareTo(compareValue) >= 0;
+			this.critList.add(result);
+		}
 		return this;
 	}
 
@@ -77,29 +93,38 @@ public class CriteriaBuilder {
 	}
 
 	public CriteriaBuilder IN(String key, String... values) {
-		boolean result = false;
-		for (String value : values) {
-			result = critDataMap.get(key).compareTo(value) >= 0;
+		if (isKeyExists(key)) {
+			boolean result = false;
+			for (String value : values) {
+				result = critDataMap.get(key).compareTo(value) >= 0;
+				if (result) {
+					break;
+				}
+			}
+			this.critList.add(result);
 		}
-		this.critList.add(result);
 		return this;
 	}
 
 	public CriteriaBuilder BETWEEN(String key, Date start, Date end) {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		try {
-			Date check = sdf.parse(critDataMap.get(key));
-			boolean result = (start.before(check) && end.after(check));
-			this.critList.add(result);
-		} catch (ParseException e) {
-			//
+		if (isKeyExists(key)) {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			try {
+				Date check = sdf.parse(critDataMap.get(key));
+				boolean result = (start.before(check) && end.after(check));
+				this.critList.add(result);
+			} catch (ParseException e) {
+				//
+			}
 		}
 		return this;
 	}
 
 	public CriteriaBuilder BETWEEN(String key, String start, String end) {
-		boolean result = (critDataMap.get(key).compareTo(start) >= 0 && critDataMap.get(key).compareTo(end) < 0);
-		this.critList.add(result);
+		if (isKeyExists(key)) {
+			boolean result = (critDataMap.get(key).compareTo(start) >= 0 && critDataMap.get(key).compareTo(end) < 0);
+			this.critList.add(result);
+		}
 		return this;
 	}
 
@@ -107,7 +132,7 @@ public class CriteriaBuilder {
 		boolean result = false;
 		for (Boolean crit : critList) {
 			result = crit;
-			if (lcond.equals(LogicalCondition.OR) && result) {
+			if ((lcond.equals(LogicalCondition.OR) && result) || (lcond.equals(LogicalCondition.AND) && !result)) {
 				return result;
 			}
 		}

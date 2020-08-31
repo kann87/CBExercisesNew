@@ -17,5 +17,4 @@ public class SystemSettings extends AbstractSettings {
 		System.out.println("OVerrided Print");
 		super.println();
 	}
-
 }

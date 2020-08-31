@@ -4,7 +4,7 @@ import java.util.Date;
 
 import com.chargebeeExercises.criteria.CriteriaBuilder;
 
-public abstract class Settings<T> {
+public abstract class Settings {
     public abstract void putLong(String key, long value);
     public abstract long getLong(String key, long defaultVal);
     public abstract void putInt(String key, int value);
